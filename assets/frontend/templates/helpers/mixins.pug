@@ -7,3 +7,9 @@ mixin style(styles)
     each href in styles
         - href = ((/^(https?:)?\/\//.test(href) || /bower_components/.test(href)) ? href : 'css/' + href);
         link(href=href rel='stylesheet')
+
+
+mixin icon(name)
+    div
+    svg(class='icon icon-'+name)
+        use(xlink:href='img/icons/sprite.svg#'+name)

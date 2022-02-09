@@ -2,6 +2,7 @@
 
 const gulp = require('gulp');
 
+
 function lazeRequireTask(taskName, path, options) {
     options = options || {};
     options.taskName = taskName;
@@ -45,6 +46,11 @@ lazeRequireTask('copy:img', './tasks/copy', {
     taskName: 'copy:img'
 });
 
+lazeRequireTask('sprite', './tasks/sprite', {
+    src: 'assets/frontend/img/svg/**/**.*',
+    dest: 'build/frontend/img/icons',
+});
+
 lazeRequireTask('mincss', './tasks/mincss', {
     src: 'build/frontend/css/*.css',
     dest: 'min',
@@ -82,6 +88,7 @@ gulp.task('build', gulp.series(
     gulp.parallel('styles', 'scripts'),
     'pug',
     gulp.parallel('copy:files', 'copy:img'),
+    'sprite',
     'mincss',
     'minjs'
 ));
@@ -93,8 +100,8 @@ gulp.task('dev', gulp.series(
 
 gulp.task('default', gulp.series(
     'build', 
-//    'eslint',
-//    gulp.parallel('watch', 'server')
+   // 'eslint',
+   gulp.parallel('watch', 'server')
 ));
 
     
